@@ -32,8 +32,10 @@
     <div class="col-md-6" ng-controller="ToBuyController" as TBC>
      <h2>To Buy:</h2>
      <ul>
-       <li>Buy 10 cookies <button class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Bought</button></li>
-       <li>Buy 10 cookies <button class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Bought</button></li>
+       <li ng-repeat='item in TBC.getItemsToBuy'>
+         buy {{item.qty}} of {{item.name}}
+         <button class="btn btn-default" ng-click="TBC.buy(item)"<span class="glyphicon glyphicon-ok"></span> Bought</button>
+       </li>
      </ul>
      <div class="emptyMessage">Everything is bought!</div>
     </div>

@@ -29,6 +29,10 @@
       items.push(item);
     }
 
+    service.buy = function(item) {
+      item.bought=true;
+    }
+
     service.getItemsToBuy = function() {
       return items.filter(function(item) {!item.bought});
     }
