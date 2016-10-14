@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" ng-app="ShoppingListCheckOff">
   <head>
     <title>Shopping List Check Off</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,31 +22,33 @@
       }
     </style>
   </head>
-<body ng-app="ShoppingListCheckOff">
+<body>
   <div class="container">
   <h1>Shopping List Check Off</h1>
 
   <div class="row">
 
     <!-- To Buy List -->
-    <div class="col-md-6" ng-controller="ToBuyController" as TBC>
+    <div class="col-md-6" ng-controller="ToBuyController as TBC">
      <h2>To Buy:</h2>
      <ul>
-       <li ng-repeat='item in TBC.getItemsToBuy'>
-         buy {{item.qty}} of {{item.name}}
-         <button class="btn btn-default" ng-click="TBC.buy(item)"<span class="glyphicon glyphicon-ok"></span> Bought</button>
+       <li ng-repeat='item in TBC.list'>
+         <button class="btn btn-default" ng-click="TBC.buy($index)"><span class="glyphicon glyphicon-ok"></span> Buy</button>
+         Buy {{item.qty}} of {{item.name}}
        </li>
      </ul>
-     <div class="emptyMessage">Everything is bought!</div>
+     <div ng-if='TBC.list.length===0' class="emptyMessage">Everything is bought!</div>
     </div>
 
     <!-- Already Bought List -->
-    <div class="col-md-6" ng-controller="AlreadyBoughtController" as ABC>
+    <div class="col-md-6" ng-controller="AlreadyBoughtController as ABC">
      <h2>Already Bought:</h2>
      <ul>
-       <li>Bought 10 cookies</li>
+       <li ng-repeat='item in ABC.list'>
+         Bought {{item.qty}} of {{item.name}}
+       </li>
      </ul>
-     <div class="emptyMessage">Nothing bought yet.</div>
+     <div ng-if='ABC.list.length===0' class="emptyMessage">Nothing bought yet.</div>
     </div>
   </div>
 </div>

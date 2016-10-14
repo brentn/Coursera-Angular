@@ -9,37 +9,47 @@
   ToBuyController.$inject = ['ShoppingListCheckOffService'];
   function ToBuyController(ShoppingListCheckOffService) {
     var toBuy = this;
-  }
+
+    ShoppingListCheckOffService.addItem('cookies','2 bags');
+    ShoppingListCheckOffService.addItem('camels','4 herds');
+    ShoppingListCheckOffService.addItem('fairy dust','1 lb')
+
+    toBuy.buy = ShoppingListCheckOffService.buy;
+    toBuy.list = ShoppingListCheckOffService.getItemsToBuy();
+    }
 
   AlreadyBoughtController.$inject = ['ShoppingListCheckOffService'];
   function AlreadyBoughtController(ShoppingListCheckOffService) {
     var bought = this;
+
+    bought.list = ShoppingListCheckOffService.getBoughtItems();
   }
 
   function ShoppingListCheckOffService() {
     var service = this;
-    var items = [];
+    var tobuy = [];
+    var bought = []
 
     service.addItem = function(name, qty) {
       var item = {
         name: name,
         qty: qty,
-        bought: false
       }
-      items.push(item);
+      tobuy.push(item);
     }
 
-    service.buy = function(item) {
-      item.bought=true;
+    service.buy = function(index) {
+      bought.push(tobuy[index]);
+      tobuy.splice(index, 1)
     }
 
     service.getItemsToBuy = function() {
-      return items.filter(function(item) {!item.bought});
+      return tobuy;
     }
 
     service.getBoughtItems = function() {
-      return items.filter(function(item) {item.bought});
+      return bought;
     }
 
   }
-})
+})();
