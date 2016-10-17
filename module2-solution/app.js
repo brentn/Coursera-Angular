@@ -13,6 +13,8 @@
     ShoppingListCheckOffService.addItem('cookies','2 bags');
     ShoppingListCheckOffService.addItem('camels','4 herds');
     ShoppingListCheckOffService.addItem('fairy dust','1 lb')
+    ShoppingListCheckOffService.addItem('grainy mustard','2 kegs')
+    ShoppingListCheckOffService.addItem('watermelon gum','3 sticks')
 
     toBuy.buy = ShoppingListCheckOffService.buy;
     toBuy.list = ShoppingListCheckOffService.getItemsToBuy();
