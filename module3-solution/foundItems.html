@@ -1,12 +1,11 @@
 <div style='clear:both'>
-<ul>
-  <table ng-if='list.foundItems.length>0'>
-    <tr><th></th><th>Name</th><th>Short Name</th><th>Description</th></tr>
-    <tr ng-repeat='item in list.foundItems'>
-      <td class='button'><button ng-click="list.onRemove({index: $index});">Don't want this one!</button></td>
-      <td class='name'>{{item.name}}</td>
-      <td class='short_name'>{{item.short_name}}</td>
-      <td class='description'>{{item.description}}</td>
-    </tr>
-  </table>
-</ul>
+<table ng-if='list.exists() && list.foundItems.length>0'>
+  <tr><th></th><th>Name</th><th>Short Name</th><th>Description</th></tr>
+  <tr ng-repeat='item in list.foundItems'>
+    <td class='button'><button ng-click="list.onRemove({index: $index});">Don't want this one!</button></td>
+    <td class='name'>{{item.name}}</td>
+    <td class='short_name'>{{item.short_name}}</td>
+    <td class='description'>{{item.description}}</td>
+  </tr>
+</table>
+<H3 ng-if='list.exists() && list.foundItems.length===0'>Nothing found</h3>

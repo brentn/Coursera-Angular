@@ -25,6 +25,9 @@
   function NarrowItDownDirectiveController() {
     var list = this;
 
+    list.exists = function() {
+      return list.foundItems!=='empty';
+    }
   }
 
   MenuSearchService.$inject = ['$http'];
@@ -54,7 +57,7 @@
     var controller = this;
 
     controller.term = '';
-    controller.found = [];
+    controller.found = 'empty';
     controller.search = function() {
       if (controller.term.length>0) {
         MenuSearchService.getMatchedMenuItems(controller.term)
