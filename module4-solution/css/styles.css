@@ -1,0 +1,31 @@
+button {
+  width:150px;
+  padding:5px;
+  margin:10px 20px;
+}
+
+.activeButton {
+  background:lightGreen;
+}
+
+.detail {
+  max-height:400px;
+  max-width:1000px;
+  overflow-y:auto;
+  margin-left:auto;
+  margin-right:auto;}
+
+td {
+  padding:5px;
+}
+
+.description {
+  color:darkgrey;
+  font-style:italic;
+}
+
+loading-spinner {
+  position:fixed;
+  top:25%;
+  left:50%
+}

@@ -1,0 +1,12 @@
+<a ui-sref='home'>Home</a>
+<hr/>
+<h3>Select a Category</h3>
+<button ng-repeat='category in $ctrl.categories.data'
+        ui-sref="categories.items({category:'{{category.short_name}}'})"
+        ui-sref-active="activeButton">
+          {{category.name}}
+</button>
+<hr/>
+
+<ui-view></ui-view>
+<br/>
