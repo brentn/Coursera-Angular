@@ -1,0 +1,54 @@
+main-menu .menu {
+  width:250px;
+  height:680px;
+}
+main-menu menu-section {
+  display:block;
+}
+main-menu .ui-accordion .ui-accordion-header {
+  color:#9bcc60;
+  font-size:20pt;
+  font-weight:bold;
+}
+main-menu .ui-accordion .ui-accordion-header-active {
+  color:#ffffff;
+  background-color:#9bcc60;
+  -webkit-box-shadow: 3px 2px 8px 0px rgba(0, 0, 0, 0.4);
+  box-shadow: 3px 2px 8px 0px rgba(0, 0, 0, 0.4);}
+main-menu .menu-items {
+}
+.ui-accordion .ui-accordion-content-active {
+  padding:0;
+  background-color:#eeeeee;
+  -webkit-box-shadow: 3px 2px 8px 0px rgba(0, 0, 0, 0.4);
+  box-shadow: 3px 2px 8px 0px rgba(0, 0, 0, 0.4);
+}
+main-menu menu-item {
+  display:inline-block;
+  width:100%;
+  padding:5px 0 5px 0;
+}
+ main-menu .menu-items>div:first-child {
+  background-image: -webkit-linear-gradient(rgba(255,255,255,0.8),rgba(0,0,0,0.0));
+}
+main-menu menu-item:hover {
+  background-color:rgba(118, 219, 30, 0.50);
+}
+main-menu menu-item img.menu-item-image {
+  width:35px;
+  padding:7px;
+  margin-right:7px;
+  float:left;
+}
+main-menu menu-item .menu-item-details {
+  margin-top:10px;
+  width:100%;
+}
+main-menu .menu-item-title {
+  font-size:10pt;
+  font-weight:500;
+}
+main-menu .menu-item-detail {
+  font-size:6.5pt;
+  color:#999999;
+}
