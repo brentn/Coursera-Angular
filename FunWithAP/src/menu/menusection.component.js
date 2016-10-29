@@ -9,6 +9,7 @@
       title: '@',
       menuItems: '<',
       total: '<',
+      subsections: '<',
       complete: '&'
     }
   })

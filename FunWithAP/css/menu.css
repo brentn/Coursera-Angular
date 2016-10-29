@@ -1,6 +1,6 @@
 main-menu .menu {
   width:250px;
-  height:680px;
+  height:720px;
 }
 main-menu menu-section, main-menu menu-search-section {
   display:block;
@@ -66,13 +66,18 @@ main-menu .menu-item-detail {
   font-size:6.5pt;
   color:#999999;
 }
+main-menu menu-search-section input {
+  border-radius:5px;
+  padding:5px;
+}
 main-menu menu-search-section input[type='text'] {
-  width:212px;
+  width:190px;
 }
 main-menu menu-search-section input[type='button'].search {
   background-image:url('images/search.png');
   background-size:contain;
-  width:24px;
+  background-position:center;
+  width:32px;
   position:relative;
   top:4px;
   left:4px;

@@ -9,6 +9,7 @@
     var search = this;
 
     search.term='';
+    search.total='';
     search.results=[];
 
     search.search = function() {
@@ -18,6 +19,10 @@
         InvoiceService.search(search.term)
         .then(function(result) {
           search.results=result.data;
+          search.total=result.data.length;
+          if (search.total===0) {
+            search.total='';
+          }
         })
       }
     }
