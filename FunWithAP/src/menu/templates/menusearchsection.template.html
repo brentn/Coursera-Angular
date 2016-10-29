@@ -1,0 +1,7 @@
+<h3>{{search.title}}<span class='total' ng-if='search.total'> ({{search.total}})</span></h3>
+<div class='menu-items'>
+  <input type='text' ng-model='search.term'/><input class='search' type='button' ng-click='search.search()'></input>
+  <div ng-repeat='item in search.results'>
+    <menu-item obj='item'></menu-item>
+  </div>
+</div>

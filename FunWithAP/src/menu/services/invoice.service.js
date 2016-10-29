@@ -62,6 +62,17 @@
       });
       return deferred.promise;
     }
+
+    service.search = function(term) {
+      var deferred = $q.defer();
+      var term = term.toLowerCase();
+      $timeout(function() {
+        deferred.resolve({data:fakeData.data.filter(function(item) {
+          return item.comment && item.comment.toLowerCase().indexOf(term)>=0
+          || item.ApprComment && item.ApprComment.toLowerCase().indexOf(term)>=0})})
+      }, 200);
+      return deferred.promise
+    }
   }
 
 })();

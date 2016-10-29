@@ -1,5 +1,3 @@
-subsection (approvable)
-section totals
-search
 subsection (accounts)
 subsection (finance)
+search by names

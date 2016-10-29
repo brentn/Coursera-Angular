@@ -2,7 +2,7 @@ main-menu .menu {
   width:250px;
   height:680px;
 }
-main-menu menu-section {
+main-menu menu-section, main-menu menu-search-section {
   display:block;
 }
 main-menu .ui-accordion .ui-accordion-header {
@@ -65,4 +65,16 @@ main-menu .menu-item-title {
 main-menu .menu-item-detail {
   font-size:6.5pt;
   color:#999999;
+}
+main-menu menu-search-section input[type='text'] {
+  width:212px;
+}
+main-menu menu-search-section input[type='button'].search {
+  background-image:url('images/search.png');
+  background-size:contain;
+  width:24px;
+  position:relative;
+  top:4px;
+  left:4px;
+  background-color:#9bcc60;
 }

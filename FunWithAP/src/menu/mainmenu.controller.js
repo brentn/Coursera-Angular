@@ -59,7 +59,7 @@
       number_of_sections_loaded++;
       if (number_of_sections_loaded==7) {
         $('#MainMenu').accordion({
-          header: "menu-section>h3",
+          header: "menu-section>h3,menu-search-section>h3",
           navigate: false,
           heightStyle: 'fill'
         });
