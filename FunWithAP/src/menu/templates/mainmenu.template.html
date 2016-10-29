@@ -2,9 +2,12 @@
   <menu-section title='Drafts' menu-items='menu.myDraftInvoices' complete='menu.onSectionComplete()' ></menu-section>
   <menu-section title='Submitted' menu-items='menu.mySubmittedInvoices' complete='menu.onSectionComplete()'
       subsections='menu.submittedSubsections' total='(menu.approvableTotal>0?menu.approvableTotal:"")'></menu-section>
-  <menu-section title='Processing' menu-items='menu.myProcessingInvoices' complete='menu.onSectionComplete()'></menu-section>
-  <menu-section title='Paying' menu-items='menu.myPayingInvoices' complete='menu.onSectionComplete()'></menu-section>
-  <menu-section title='Paid' menu-items='menu.myPaidInvoices' complete='menu.onSectionComplete()'></menu-section>
+  <menu-section title='Processing' menu-items='menu.myProcessingInvoices' complete='menu.onSectionComplete()'
+      subsections='menu.processingSubsections' total=''></menu-section>
+  <menu-section title='Paying' menu-items='menu.myPayingInvoices' complete='menu.onSectionComplete()'
+    subsections='menu.payingSubsections' total=''></menu-section>
+  <menu-section title='Paid' menu-items='menu.myPaidInvoices' complete='menu.onSectionComplete()'
+    subsections='menu.paidSubsections' total=''></menu-section>
   <menu-section title='Deleted' menu-items='menu.myDeletedInvoices' complete='menu.onSectionComplete()'></menu-section>
   <menu-search-section title='Search' complete='menu.onSectionComplete()'></menu-search-section>
 </div>

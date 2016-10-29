@@ -49,16 +49,17 @@
     }
 
     service.InvoicesForMyAccounts = function() {
-      var result = [];
-      var accounts = AccountsService.MyAccounts();
-      for (var i in accounts) {
-        result.push({'account':accounts[i],
-            'data':fakeData.data.filter(function(item) {return item.CostCenter==accounts[i];})
-        });
-      };
       var deferred = $q.defer();
-      $timeout(function() {
-        deferred.resolve({data:result});
+      AccountsService.MyAccounts()
+      .then(function(result) {
+        var accounts = result.data;
+        var result = [];
+        for (var i in accounts) {
+          $.merge(result, fakeData.data.filter(function(item) {return item.CostCenter==accounts[i];}));
+        };
+        $timeout(function() {
+          deferred.resolve({data:result});
+        }, 800);
       });
       return deferred.promise;
     }

@@ -2,9 +2,10 @@
 <div class='menu-items'>
   <div class='menu-subsection' ng-repeat='subsection in section.subsections'>
     <h4>{{subsection.title}}</h4>
-    <div ng-repeat='item in subsection.menuItems'>
+    <div ng-if='!subsection.asTree' ng-repeat='item in subsection.menuItems'>
       <menu-item obj='item'>
     </div>
+    <menu-tree ng-if='subsection.asTree' title='subsection.title' menuItems='subsection.menuItems'></menu-tree>
   </div>
   <h4 ng-if='section.subsections.length>0'>My Invoices</h4>
   <div ng-repeat='item in section.menuItems'>

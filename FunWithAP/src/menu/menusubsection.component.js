@@ -7,6 +7,7 @@
     controllerAs: 'subsection',
     bindings: {
       title: '@',
+      asTree: '@',
       menuItems: '<'
     }
   });

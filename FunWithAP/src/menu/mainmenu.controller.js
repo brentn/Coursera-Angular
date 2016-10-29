@@ -16,19 +16,18 @@
     menu.myPaidInvoices = [];
     menu.myDeletedInvoices = [];
     menu.approvableTotal = 0;
-    menu.myAccountsSubmitted = [];
-    menu.myAccountsProcessing = [];
-    menu.myAccountsPaying = [];
-    menu.myAccountsPaid = [];
 
     menu.submittedSubsections = [];
+    menu.processingSubsections = [];
+    menu.payingSubsections = [];
+    menu.paidSubsections = [];
 
     menu.$onInit  = function() {
       menu.refresh();
     }
 
     menu.refresh = function() {
-      console.debug("Looking up invoices...")
+
       InvoiceService.MyInvoices()
       .then(function(result) {
         menu.myDraftInvoices = getDraftInvoices(result.data);
@@ -38,20 +37,41 @@
         menu.myPaidInvoices = getPaidInvoices(result.data);
         menu.myDeletedInvoices = getDeletedInvoices(result.data);
       });
+
+      menu.submittedSubsections = [];
+      menu.processingSubsections = [];
+      menu.payingSubsections = [];
+      menu.paidSubsections = [];
+
+      // Look up extra sections in order they should appear
       InvoiceService.MyApprovableInvoices()
       .then(function(result) {
         if (result.data.length>0) {
-
-          menu.submittedSubsections.push({title: 'Awaiting my approval', menuItems:result.data})
+          menu.submittedSubsections.push({title: 'Awaiting my approval', asTree: false, menuItems:result.data})
           menu.approvableTotal=result.data.length;
         } else {
           menu.submittedSubsections = [];
           menu.approvableTotal=0;
         }
-      })
-      InvoiceService.InvoicesForMyAccounts()
-      .then(function(result) {
-        menu.myAccountsSubmitted = getSubmittedInvoices(result.data);
+        InvoiceService.InvoicesForMyAccounts()
+        .then(function(result) {
+          var myAccountsSubmitted = getSubmittedInvoices(result.data);
+          if (myAccountsSubmitted.length>0) {
+            menu.submittedSubsections.push({title: 'My Accounts', asTree: true, menuItems:myAccountsSubmitted})
+          }
+          var myAccountsProcessing = getProcessingInvoices(result.data);
+          if (myAccountsProcessing.length>0) {
+            menu.processingSubsections.push({title: 'My Accounts', asTree: true, menuItems:myAccountsProcessing})
+          }
+          var myAccountsPaying = getPayingInvoices(result.data);
+          if (myAccountsPaying.length>0) {
+            menu.payingSubsections.push({title: 'My Accounts', asTree: true, menuItems:myAccountsPaying})
+          }
+          var myAccountsPaid = getPaidInvoices(result.data);
+          if (myAccountsPaid.length>0) {
+            menu.paidSubsections.push({title: 'My Accounts', asTree: true, menuItems:myAccountsPaid})
+          }
+        })
       })
     }
 
@@ -65,6 +85,8 @@
         });
       }
     }
+
+    // Private Methods
 
     function getDraftInvoices(invoices) {
       return invoices.filter(function(invoice) {
