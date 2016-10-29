@@ -1,5 +1,5 @@
-<img class='menu-item-image' ng-src={{item.getProfileImageUrl()}}></img>
+<img class='menu-item-image' ng-src={{menuItem.getProfileImageUrl()}}></img>
 <div class='menu-item-details'>
-  <span class='menu-item-title'>{{item.getVendorId()}}</span><br/>
-  <span class='menu-item-detail'>#{{item.invoice.InvoiceId}} {{item.invoice.InvoiceDate | date : format : timezone}}</span>
+  <span class='menu-item-title'>{{menuItem.obj.VendorId||'Invoice'}}</span><br/>
+  <span class='menu-item-detail'>#{{menuItem.obj.InvoiceId}} {{menuItem.obj.InvoiceDate | date : format : timezone}}</span>
 </div>

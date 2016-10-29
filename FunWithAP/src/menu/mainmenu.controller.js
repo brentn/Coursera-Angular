@@ -1,19 +1,24 @@
 (function() {
   'use strict';
 
-  angular.module('AP')
+  angular.module('MainMenu')
   .controller('MainMenuController', MainMenuController);
 
   MainMenuController.$inject = ['InvoiceService', 'Status'];
   function MainMenuController(InvoiceService, Status) {
     var menu = this;
     var number_of_sections_loaded=0;
+    menu.searchResults = [];
     menu.myDraftInvoices = [];
     menu.mySubmittedInvoices = [];
     menu.myProcessingInvoices = [];
     menu.myPayingInvoices = [];
     menu.myPaidInvoices = [];
     menu.myDeletedInvoices = [];
+    menu.myAccountsSubmitted = [];
+    menu.myAccountsProcessing = [];
+    menu.myAccountsPaying = [];
+    menu.myAccountsPaid = [];
 
     menu.$onInit  = function() {
       console.debug("Looking up invoices...")
@@ -26,11 +31,15 @@
         menu.myPaidInvoices = getPaidInvoices(result.data);
         menu.myDeletedInvoices = getDeletedInvoices(result.data);
       });
+      InvoiceService.InvoicesForMyAccounts()
+      .then(function(result) {
+
+      })
     }
 
     menu.onSectionComplete = function() {
       number_of_sections_loaded++;
-      if (number_of_sections_loaded==6) {
+      if (number_of_sections_loaded==7) {
         $('#MainMenu').accordion({
           header: "menu-section>h3",
           navigate: false,

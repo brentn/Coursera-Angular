@@ -1,19 +1,16 @@
 (function() {
   'use strict';
 
-  angular.module('AP')
+  angular.module('MainMenu')
   .controller('MenuItemController', MenuItemController);
 
   MenuItemController.$inject = ['UserService'];
   function MenuItemController(UserService) {
-    var item = this;
+    var menuItem = this;
 
-    item.getProfileImageUrl = function() {
-      return UserService.ProfileImageUrl(item.invoice.UserId);
+    menuItem.getProfileImageUrl = function() {
+      return UserService.ProfileImageUrl(menuItem.obj.UserId);
     }
 
-    item.getVendorId = function() {
-      return (item.invoice.VendorId||"Invoice")
-    }
   }
 })();

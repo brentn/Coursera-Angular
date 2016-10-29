@@ -1,12 +1,12 @@
 (function() {
   'use strict';
 
-  angular.module('AP')
+  angular.module('MainMenu')
   .component('menuItem', {
     templateUrl: 'src/menu/templates/menuitem.template.html',
-    controller: 'MenuItemController as item',
+    controller: 'MenuItemController as menuItem',
     bindings: {
-      invoice: '<'
+      obj: '<'
     }
   });
 

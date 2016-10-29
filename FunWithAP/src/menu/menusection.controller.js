@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  angular.module('AP')
+  angular.module('MainMenu')
   .controller('MenuSectionController', MenuSectionController);
 
   function MenuSectionController() {

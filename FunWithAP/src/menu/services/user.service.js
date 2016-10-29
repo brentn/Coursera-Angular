@@ -1,14 +1,18 @@
 (function() {
   'use strict';
 
-  angular.module('AP')
+  angular.module('MainMenu')
   .service('UserService', UserService);
 
   function UserService() {
     var user=this;
 
     user.getUsername = function(userId) {
-      return 'jasonb';
+      switch (userId) {
+        case 2:return 'jasonb'; break;
+        case 3:return 'brentn'; break;
+        default: return '';
+      }
     }
 
     user.ProfileImageUrl = function(userId) {
