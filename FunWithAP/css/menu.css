@@ -10,6 +10,9 @@ main-menu .ui-accordion .ui-accordion-header {
   font-size:20pt;
   font-weight:bold;
 }
+main-menu .ui-accordion-header .total {
+  float:right;
+}
 main-menu .ui-accordion .ui-accordion-header-active {
   color:#ffffff;
   background-color:#9bcc60;

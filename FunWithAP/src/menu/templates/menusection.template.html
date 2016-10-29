@@ -1,4 +1,4 @@
-<h3>{{section.title}}</h3>
+<h3>{{section.title}}<span class='total' ng-if='section.total'> ({{section.total}})</span></h3>
 <div class='menu-items'>
   <div class='menu-subsection' ng-repeat='subsection in section.subsections'>
     <h4>{{subsection.title}}</h4>
