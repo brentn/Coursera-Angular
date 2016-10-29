@@ -8,6 +8,7 @@
   function MainMenuController(InvoiceService, Status) {
     var menu = this;
     var number_of_sections_loaded=0;
+    var myApprovableInvoices = [];
     menu.searchResults = [];
     menu.myDraftInvoices = [];
     menu.mySubmittedInvoices = [];
@@ -20,7 +21,13 @@
     menu.myAccountsPaying = [];
     menu.myAccountsPaid = [];
 
+    menu.submittedSubsections = [];
+
     menu.$onInit  = function() {
+      menu.refresh();
+    }
+
+    menu.refresh = function() {
       console.debug("Looking up invoices...")
       InvoiceService.MyInvoices()
       .then(function(result) {
@@ -31,9 +38,17 @@
         menu.myPaidInvoices = getPaidInvoices(result.data);
         menu.myDeletedInvoices = getDeletedInvoices(result.data);
       });
+      InvoiceService.MyApprovableInvoices()
+      .then(function(result) {
+        if (result.data.length>0) {
+          menu.submittedSubsections.push({title: 'Awaiting my approval', menuItems:result.data})
+        } else {
+          menu.submittedSubsections = [];
+        }
+      })
       InvoiceService.InvoicesForMyAccounts()
       .then(function(result) {
-
+        menu.myAccountsSubmitted = getSubmittedInvoices(result.data);
       })
     }
 

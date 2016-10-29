@@ -15,7 +15,18 @@ main-menu .ui-accordion .ui-accordion-header-active {
   background-color:#9bcc60;
   -webkit-box-shadow: 3px 2px 8px 0px rgba(0, 0, 0, 0.4);
   box-shadow: 3px 2px 8px 0px rgba(0, 0, 0, 0.4);}
-main-menu .menu-items {
+main-menu .menu-items .menu-subsection {
+  background-color:rgba(173,216,230,0.5);
+}
+main-menu .menu-items .menu-subsection h4 {
+  background-color:rgba(173,216,230,1.0);
+}
+main-menu .menu-items h4 {
+  border-radius:5px;
+  margin:10px 0 0 0;
+  text-align:center;
+  font-weight:normal;
+  background-color:#bbe270;
 }
 .ui-accordion .ui-accordion-content-active {
   padding:0;

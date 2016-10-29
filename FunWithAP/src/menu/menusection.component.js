@@ -8,6 +8,7 @@
     bindings: {
       title: '@',
       menuItems: '<',
+      subsections: '<',
       complete: '&'
     }
   })

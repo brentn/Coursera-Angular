@@ -1,5 +1,12 @@
 <h3>{{section.title}}</h3>
 <div class='menu-items'>
+  <div class='menu-subsection' ng-repeat='subsection in section.subsections'>
+    <h4>{{subsection.title}}</h4>
+    <div ng-repeat='item in subsection.menuItems'>
+      <menu-item obj='item'>
+    </div>
+  </div>
+  <h4 ng-if='section.subsections.length>0'>My Invoices</h4>
   <div ng-repeat='item in section.menuItems'>
     <menu-item obj='item'></menu-item>
   </div>
