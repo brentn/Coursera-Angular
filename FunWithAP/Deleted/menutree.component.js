@@ -4,8 +4,9 @@
   angular.module('MainMenu')
   .component('menuTree', {
     templateUrl: 'src/menu/templates/menutree.template.html',
+    controller: 'MenuTreeController as tree',
     bindings: {
-      title: '@',
+      title: '<',
       menuItems: '<'
     }
   })

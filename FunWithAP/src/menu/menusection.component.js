@@ -6,11 +6,10 @@
     templateUrl: 'src/menu/templates/menusection.template.html',
     controller: 'MenuSectionController as section',
     bindings: {
-      title: '@',
-      menuItems: '<',
+      title: '<',
+      items: '<',
       total: '<',
       subsections: '<',
-      complete: '&'
     }
   })
 

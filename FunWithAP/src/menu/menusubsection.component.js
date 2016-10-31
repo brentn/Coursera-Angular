@@ -4,11 +4,11 @@
   angular.module('MainMenu')
   .component('menuSubsection', {
     templateUrl: 'src/menu/templates/menusubsection.template.html',
-    controllerAs: 'subsection',
+    controller: 'MenuSubsectionController as subsection',
     bindings: {
-      title: '@',
-      asTree: '@',
-      menuItems: '<'
+      title: '<',
+      items: '<',
+      level: '@'
     }
   });
 })();

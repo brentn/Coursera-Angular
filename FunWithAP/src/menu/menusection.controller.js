@@ -4,11 +4,17 @@
   angular.module('MainMenu')
   .controller('MenuSectionController', MenuSectionController);
 
-  function MenuSectionController() {
+  MenuSectionController.$inject = ['$scope']
+  function MenuSectionController($scope) {
     var section = this
+    section.subsectionsDisplayed = section.subsections
+      && section.subsections
+        .filter(function(subsection) {
+            return subsection.items && subsection.items.length>0;
+          }).length>0;
 
     section.$postLink = function() {
-      section.complete();
+      $scope.$emit('menuSection.loaded')
     }
   }
 })();

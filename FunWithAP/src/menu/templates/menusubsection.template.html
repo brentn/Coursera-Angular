@@ -1,6 +1,10 @@
-<span class='menu-subsection-title'>{{subsection.title}}</span>
 <div class='menu-subsection-content'>
-  <div ng-repeat='item in subsection.menuItems'>
-    <menu-item obj='item'></menu-item>
+  {{subsection.title}}
+  <div ng-repeat='item in subsection.items'>
+    <div ng-if='item.items' >
+      <div ng-click='subsection.expand($event)'> + {{item.title}}</div>
+      <menu-subsection  class='collapsible' items='item.items' level={{item.level||0}}></menu-subsection>
+    </div>
+    <menu-item ng-if='!item.items' obj='item'>ONLY</menu-item>
   </div>
 </div>

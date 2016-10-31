@@ -4,8 +4,8 @@
   angular.module('MainMenu')
   .controller('MenuSearchSectionController', MenuSearchSectionController);
 
-  MenuSearchSectionController.$inject = ['InvoiceService']
-  function MenuSearchSectionController(InvoiceService) {
+  MenuSearchSectionController.$inject = ['MenuDataService']
+  function MenuSearchSectionController(MenuDataService) {
     var search = this;
 
     search.term='';
@@ -16,7 +16,7 @@
       if (search.term.length==0) {
         search.results=[];
       } else {
-        InvoiceService.search(search.term)
+        MenuDataService.search(search.term)
         .then(function(result) {
           search.results=result.data;
           search.total=result.data.length;

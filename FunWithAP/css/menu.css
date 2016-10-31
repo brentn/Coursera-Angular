@@ -83,3 +83,6 @@ main-menu menu-search-section input[type='button'].search {
   left:4px;
   background-color:#9bcc60;
 }
+main-menu .collapsible {
+  display:none;
+}
