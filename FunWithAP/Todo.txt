@@ -1,7 +1,2 @@
-move business logic into services
-  MENUDATASERVICE
-Menu section complete should use events, not callback
-build own tree
-subsection (accounts)
 subsection (finance)
-search by names
+move item template into menudata.service (somehow)

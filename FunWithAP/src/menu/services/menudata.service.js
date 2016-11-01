@@ -4,8 +4,8 @@
   angular.module('MainMenu')
   .service('MenuDataService', MenuDataService)
 
-  MenuDataService.$inject = ['$q', '$timeout', 'AccountsService', 'UserService'];
-  function MenuDataService($q, $timeout, AccountsService, UserService) {
+  MenuDataService.$inject = ['$q', '$timeout', '$filter', 'AccountsService', 'UserService'];
+  function MenuDataService($q, $timeout, $filter, AccountsService, UserService) {
     var service=this;
     const Status = {
       DRAFT: 0,
@@ -28,8 +28,33 @@
       subsections: [{
         title:'Awaiting my approval'
       },{
+        title:'Finance'
+      },{
         title:'My Accounts',
       }]
+    },{
+      title:'Processing',
+      subsections: [{
+        title:'Finance'
+      },{
+        title:'My Accounts'
+      }]
+    },{
+      title:'Paying',
+      subsections: [{
+        title:'Finance'
+      },{
+        title:'My Accounts'
+      }]
+    },{
+      title:'Paid',
+      subsections: [{
+        title:'Finance'
+      },{
+        title:'My Accounts'
+      }]
+    },{
+      title:'Deleted'
     }];
 
     service.Reload = function() {
@@ -42,11 +67,26 @@
     }
 
     service.LoadAllItems = function() {
-      // returns a flat list of all menu items, for someone like Finance to see.
+      // returns a tree of all menu items, for someone like Finance to see.
       var deferred = $q.defer();
       $timeout(function () {
         deferred.resolve(fakeData);
       }, 800);
+      deferred.promise.then(function(result) {
+        var items=[];
+        var submitted = getSubmittedInvoices(result.data);
+        service.MenuData[1].subsections[1].title='All Items ('+submitted.length+')';
+        service.MenuData[1].subsections[1].items=buildTree(submitted);
+        var finance = getProcessingInvoices(result.data);
+        service.MenuData[2].subsections[0].title='Finance';
+        service.MenuData[2].subsections[0].items=buildFinanceTree(finance);
+        var paying = getPayingInvoices(result.data);
+        service.MenuData[3].subsections[0].title='All Items ('+paying.length+')';
+        service.MenuData[3].subsections[0].items=buildTree(paying);
+        var paid = getPaidInvoices(result.data);
+        service.MenuData[4].subsections[0].title='All Items ('+paid.length+')';
+        service.MenuData[4].subsections[0].items=buildTree(paid);
+      })
       return deferred.promise;
     };
 
@@ -59,6 +99,10 @@
       deferred.promise.then(function(result) {
         service.MenuData[0].items = getDraftInvoices(result.data);
         service.MenuData[1].items = getSubmittedInvoices(result.data);
+        service.MenuData[2].items = getProcessingInvoices(result.data);
+        service.MenuData[3].items = getPayingInvoices(result.data);
+        service.MenuData[4].items = getPaidInvoices(result.data);
+        service.MenuData[5].items = getDeletedInvoices(result.data);
       })
       return deferred.promise;
     }
@@ -81,21 +125,36 @@
       // returns a tree of menu items, separated by account/user/etc for which I am responsible
       var deferred = $q.defer();
       AccountsService.MyAccounts()
-      .then(function(result) {
-        var accounts = result.data;
-        var result = [];
+      .then(function(accountResponse) {
+        var accounts = accountResponse.data;
+        var tree = [];
         for (var i in accounts) {
-          result.push({title:accounts[i],
-            items:fakeData.data.filter(function(item) {return item.CostCenter==accounts[i];})});
+          tree.push({title:accounts[i],
+            items:fakeData.data.filter(function(item) {return item.CostCenter==accounts[i]})});
         };
         $timeout(function() {
-          deferred.resolve({data:result});
+          deferred.resolve({data:tree});
         }, 800);
         deferred.promise.then(function(result) {
-          service.MenuData[1].subsections[1].items = result.data;
+          service.MenuData[1].subsections[2].items = [];
+          service.MenuData[2].subsections[1].items = [];
+          service.MenuData[3].subsections[1].items = [];
+          service.MenuData[4].subsections[1].items = [];
+          for (i in result.data) {
+            var item = result.data[i];
+            addIfFound(item.title, getSubmittedInvoices(item.items),  service.MenuData[1].subsections[2].items);
+            addIfFound(item.title, getProcessingInvoices(item.items), service.MenuData[2].subsections[1].items);
+            addIfFound(item.title, getPayingInvoices(item.items),     service.MenuData[3].subsections[1].items);
+            addIfFound(item.title, getPaidInvoices(item.items),       service.MenuData[4].subsections[1].items);
+          }
         })
       });
       return deferred.promise;
+      function addIfFound(account, items, list) {
+        if (items.length>0) {
+          list.push({title:account, items:items});
+        }
+      }
     }
 
     service.search = function(term) {
@@ -137,8 +196,82 @@
               || inv.Status==Status.PENDINGEDMS)
       })
     }
+    function getProcessingInvoices(invoices) {
+      return invoices.filter(function(inv) {
+        return (inv.Status==Status.PROCESSING
+          || inv.Status==Status.PENDINGDOWNLOAD
+          || inv.Status==Status.DOWNLOADFAILED);
+      })
+    }
+    function getPayingInvoices(invoices) {
+      return invoices.filter(function(inv) {
+        return (inv.Status==Status.PENDINGDOWNLOAD);
+      })
+    }
+    function getPaidInvoices(invoices) {
+      return invoices.filter(function(inv) {
+        return (inv.Status==Status.PAID);
+      })
+    }
+    function getDeletedInvoices(invoices) {
+      return invoices.filter(function(inv) {
+        return (inv.Status==Status.DELETED);
+      })
+    }
+
+    function buildTree(items) {
+      var result = [];
+      var sortedItems = $filter('orderBy')(items, 'VendorId');
+      for (var i in  sortedItems) {
+        var item = sortedItems[i];
+        var vendor = item.VendorId||'_NO VENDOR_';
+        var letter = vendor[0].toUpperCase();
+        var letterNode = result.filter(function(node) {return node.title==letter});
+        if (letterNode.length===0) {
+          letterNode = {title:letter, items:[]};
+          result.push(letterNode);
+        } else {
+          letterNode=letterNode[0];
+        }
+        var vendorNode = letterNode.items.filter(function(node) {return node.title==vendor});
+        if (vendorNode.length===0) {
+          vendorNode = {title:vendor, items:[]}
+          letterNode.items.push(vendorNode);
+        } else {
+          vendorNode=vendorNode[0];
+        }
+        vendorNode.items.push(item);
+      }
+      return result;
+    }
+
+    function buildFinanceTree(items) {
+      var result = [];
+      var companies = ['PTC', 'GAiN'];
+      var payment_methods = ['Chq/EFT', 'Wire Transfer', 'Amex'];
+      for (var i in companies) {
+        for (var j in payment_methods) {
+          result.push({title:companies[i]+' ('+payment_methods[j]+')', items:[]});
+        }
+      }
+      result.push({title:'Pending Import', items:[]})
+      var sortedItems = $filter('orderBy')(items, 'InvoiceDate');
+      for (var i in sortedItems) {
+        var item = sortedItems[i];
+        var index = 0
+        if (item.Status==Status.PENDINGDOWNLOAD || item.Status==Status.DOWNLOADFAILED) {
+          index = companies.length*payment_methods.length;
+        } else {
+          index = (companies.indexOf(item.Company)*payment_methods.length)
+          + payment_methods.indexOf(item.PaymentMethod||'Chq/EFT');
+        }
+        result[index].items.push(item);
+      }
+      // update totals
+      for (var i in result) {
+        result[i].title += ' ('+result[i].items.length+')'
+      }
+      return result;
+    }
   }
-
-
-
 })();
