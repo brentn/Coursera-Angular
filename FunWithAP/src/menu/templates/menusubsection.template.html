@@ -1,7 +1,7 @@
 <div class='menu-subsection-content'>
   {{subsection.title}}
   <div ng-repeat='item in subsection.items'>
-    <div ng-if='item.items && item.items.length>0' >
+    <div class='tree' ng-if='item.items && item.items.length>0' >
       <div ng-click='subsection.expand($event)'> + {{item.title}}</div>
       <menu-subsection  class='collapsible' items='item.items' level={{item.level||0}}></menu-subsection>
     </div>

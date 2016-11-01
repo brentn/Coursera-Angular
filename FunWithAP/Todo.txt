@@ -1,2 +1,3 @@
-subsection (finance)
+
 move item template into menudata.service (somehow)
+add finance and signing authority role flags to top

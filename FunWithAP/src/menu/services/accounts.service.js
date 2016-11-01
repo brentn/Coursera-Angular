@@ -8,7 +8,7 @@
   function AccountsService($q, $timeout) {
     var service = this;
 
-    service.MyAccounts = function() {
+    service.myAccounts = function() {
       var deferred = $q.defer();
       $timeout(function() {
         deferred.resolve({data:['110100','110110','110120','110130']});

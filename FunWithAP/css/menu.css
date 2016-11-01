@@ -83,7 +83,14 @@ main-menu menu-search-section input[type='button'].search {
   left:4px;
   background-color:#9bcc60;
 }
-main-menu menu-subsection div {
+main-menu .tree {
+  margin-top:4px;
+  padding:4px;
+  border:2px solid white;
+  border-radius:4px;
+}
+main-menu .tree .tree {
+  border:none;
   margin-left:4px;
 }
 main-menu .collapsible {
