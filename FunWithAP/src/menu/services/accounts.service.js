@@ -15,5 +15,6 @@
       }, 800);
       return deferred.promise;
     }
+
   }
 })();

@@ -8,43 +8,47 @@
   function MenuDataService($q, $filter, InvoiceService, AccountsService, UserService) {
     var service=this;
 
-    service.MenuData = [{
-      title:'Drafts',
-    },{
-      title:'Submitted',
-      subsections: [{
-        title:'Awaiting my approval'
+    service.MenuData = {
+      userFlags:'',
+      sections: [{
+        title:'Drafts',
       },{
-        title:'Finance'
+        title:'Submitted',
+        subsections: [{
+          title:'Awaiting my approval'
+        },{
+          title:'Finance'
+        },{
+          title:'My Accounts',
+        }]
       },{
-        title:'My Accounts',
+        title:'Processing',
+        subsections: [{
+          title:'Finance'
+        },{
+          title:'My Accounts'
+        }]
+      },{
+        title:'Paying',
+        subsections: [{
+          title:'Finance'
+        },{
+          title:'My Accounts'
+        }]
+      },{
+        title:'Paid',
+        subsections: [{
+          title:'Finance'
+        },{
+          title:'My Accounts'
+        }]
+      },{
+        title:'Deleted'
       }]
-    },{
-      title:'Processing',
-      subsections: [{
-        title:'Finance'
-      },{
-        title:'My Accounts'
-      }]
-    },{
-      title:'Paying',
-      subsections: [{
-        title:'Finance'
-      },{
-        title:'My Accounts'
-      }]
-    },{
-      title:'Paid',
-      subsections: [{
-        title:'Finance'
-      },{
-        title:'My Accounts'
-      }]
-    },{
-      title:'Deleted'
-    }];
+    };
 
     service.Reload = function() {
+      service.MenuData.userFlags='';
       return $q.all([
         service.LoadMyItems(),
         service.LoadMyApprovableItems(),
@@ -55,34 +59,38 @@
 
     service.LoadFinanceItems = function() {
       // returns a tree of all menu items, for someone like Finance to see.
-      return InvoiceService.getAllInvoices()
-      .then(function(result) {
-        var items=[];
-        var submitted = InvoiceService.getSubmittedInvoices(result.data);
-        service.MenuData[1].subsections[1].title='All Items ('+submitted.length+')';
-        service.MenuData[1].subsections[1].items=buildTree(submitted);
-        var finance = InvoiceService.getProcessingInvoices(result.data);
-        service.MenuData[2].subsections[0].title='Finance';
-        service.MenuData[2].subsections[0].items=buildFinanceTree(finance);
-        var paying = InvoiceService.getPayingInvoices(result.data);
-        service.MenuData[3].subsections[0].title='All Items ('+paying.length+')';
-        service.MenuData[3].subsections[0].items=buildTree(paying);
-        var paid = InvoiceService.getPaidInvoices(result.data);
-        service.MenuData[4].subsections[0].title='All Items ('+paid.length+')';
-        service.MenuData[4].subsections[0].items=buildTree(paid);
-      });
+      if (UserService.currentUserIsFinance()) {
+        service.MenuData.userFlags = '[Finance] '+service.MenuData.userFlags;
+        return InvoiceService.getAllInvoices()
+        .then(function(result) {
+          var items=[];
+          var submitted = InvoiceService.getSubmittedInvoices(result.data);
+          service.MenuData.sections[1].subsections[1].title='All Items ('+submitted.length+')';
+          service.MenuData.sections[1].subsections[1].items=buildTree(submitted);
+          var finance = InvoiceService.getProcessingInvoices(result.data);
+          service.MenuData.sections[2].subsections[0].title='Finance';
+          service.MenuData.sections[2].subsections[0].items=buildFinanceTree(finance);
+          var paying = InvoiceService.getPayingInvoices(result.data);
+          service.MenuData.sections[3].subsections[0].title='All Items ('+paying.length+')';
+          service.MenuData.sections[3].subsections[0].items=buildTree(paying);
+          setTotal(service.MenuData.sections[3], paying.length);
+          var paid = InvoiceService.getPaidInvoices(result.data);
+          service.MenuData.sections[4].subsections[0].title='All Items ('+paid.length+')';
+          service.MenuData.sections[4].subsections[0].items=buildTree(paid);
+        });
+      }
     };
 
     service.LoadMyItems = function() {
       // returns a flat list of all menu items belonging to the current user
       return InvoiceService.getMyInvoices()
       .then(function(result) {
-        service.MenuData[0].items = InvoiceService.getDraftInvoices(result.data);
-        service.MenuData[1].items = InvoiceService.getSubmittedInvoices(result.data);
-        service.MenuData[2].items = InvoiceService.getProcessingInvoices(result.data);
-        service.MenuData[3].items = InvoiceService.getPayingInvoices(result.data);
-        service.MenuData[4].items = InvoiceService.getPaidInvoices(result.data);
-        service.MenuData[5].items = InvoiceService.getDeletedInvoices(result.data);
+        service.MenuData.sections[0].items = InvoiceService.getDraftInvoices(result.data);
+        service.MenuData.sections[1].items = InvoiceService.getSubmittedInvoices(result.data);
+        service.MenuData.sections[2].items = InvoiceService.getProcessingInvoices(result.data);
+        service.MenuData.sections[3].items = InvoiceService.getPayingInvoices(result.data);
+        service.MenuData.sections[4].items = InvoiceService.getPaidInvoices(result.data);
+        service.MenuData.sections[5].items = InvoiceService.getDeletedInvoices(result.data);
       });
     }
 
@@ -90,34 +98,36 @@
       // returns a flat list of menu items which are currently in a state that require the current user to approve them
       return InvoiceService.getInvoicesAwaitingMyApproval()
       .then(function(result) {
-        setTotal(service.MenuData[1], result.data.length);
-        service.MenuData[1].subsections[0].items = result.data;
+        setTotal(service.MenuData.sections[1], result.data.length);
+        service.MenuData.sections[1].subsections[0].items = result.data;
       });
-      function setTotal(obj, total) {
-        if (total===0) {
-          delete obj.total;
-        } else {
-          obj.total=total;
-        }
-      }
     }
 
     service.LoadItemsIOversee = function() {
       // returns a tree of menu items, separated by account/user/etc for which I am responsible
-      return InvoiceService.getInvoicesForMyAccounts()
-      .then(function(result) {
-        service.MenuData[1].subsections[2].items = [];
-        service.MenuData[2].subsections[1].items = [];
-        service.MenuData[3].subsections[1].items = [];
-        service.MenuData[4].subsections[1].items = [];
-        for (var i in result.data) {
-          var item = result.data[i];
-          addIfFound(item.title, InvoiceService.getSubmittedInvoices(item.items),  service.MenuData[1].subsections[2].items);
-          addIfFound(item.title, InvoiceService.getProcessingInvoices(item.items), service.MenuData[2].subsections[1].items);
-          addIfFound(item.title, InvoiceService.getPayingInvoices(item.items),     service.MenuData[3].subsections[1].items);
-          addIfFound(item.title, InvoiceService.getPaidInvoices(item.items),       service.MenuData[4].subsections[1].items);
-        }
-      });
+      AccountsService.myAccounts().then(function(result) {
+        if (result.data.length>0) {
+          service.MenuData.userFlags += ' [Signing authority]';
+          return InvoiceService.getInvoicesForMyAccounts()
+          .then(function(result) {
+            service.MenuData.sections[1].subsections[2].items = [];
+            service.MenuData.sections[2].subsections[1].items = [];
+            service.MenuData.sections[3].subsections[1].items = [];
+            service.MenuData.sections[4].subsections[1].items = [];
+            for (var i in result.data) {
+              var item = result.data[i];
+              addIfFound(item.title, InvoiceService.getSubmittedInvoices(item.items),
+                service.MenuData.sections[1].subsections[2].items);
+              addIfFound(item.title, InvoiceService.getProcessingInvoices(item.items),
+                service.MenuData.sections[2].subsections[1].items);
+              addIfFound(item.title, InvoiceService.getPayingInvoices(item.items),
+                service.MenuData.sections[3].subsections[1].items);
+              addIfFound(item.title, InvoiceService.getPaidInvoices(item.items),
+                service.MenuData.sections[4].subsections[1].items);
+            }
+          }
+        )};
+      })
 
       function addIfFound(account, items, list) {
         if (items.length>0) {
@@ -126,9 +136,19 @@
       }
     }
 
+    service.search = function(term) {
+      return InvoiceService.search(term);
+    }
 
     // Private Methods
 
+    function setTotal(obj, total) {
+      if (total===0) {
+        delete obj.total;
+      } else {
+        obj.total=total;
+      }
+    }
 
     function buildTree(items) {
       var result = [];
@@ -179,9 +199,12 @@
         result[index].items.push(item);
       }
       // update totals
+      var total=0;
       for (var i in result) {
         result[i].title += ' ('+result[i].items.length+')'
+        total += result[i].items.length;
       }
+      setTotal(service.MenuData.sections[2], total);
       return result;
     }
   }

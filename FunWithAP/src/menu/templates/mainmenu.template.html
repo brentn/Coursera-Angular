@@ -1,5 +1,6 @@
 <div id='MainMenu' class='menu'>
-  <menu-section ng-repeat='section in menu.data'
+  <span class='user-flags'>{{menu.data.userFlags}}</span>
+  <menu-section ng-repeat='section in menu.data.sections'
     title='section.title' total='section.total' items='section.items'
     subsections='section.subsections'>
   </menu-section>

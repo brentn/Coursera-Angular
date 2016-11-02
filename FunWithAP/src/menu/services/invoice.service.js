@@ -4,8 +4,8 @@
   angular.module('MainMenu')
   .service('InvoiceService', InvoiceService);
 
-  InvoiceService.$inject = ['$http', '$q', '$filter', 'AccountsService', '$timeout'];
-  function InvoiceService($http, $q, $filter, AccountsService, $timeout) {
+  InvoiceService.$inject = ['$http', '$q', '$filter', 'UserService', 'AccountsService', '$timeout'];
+  function InvoiceService($http, $q, $filter, UserService, AccountsService, $timeout) {
     var invoices = this;
     const Status = {
       DRAFT: 0,
@@ -113,13 +113,13 @@
     }
     invoices.getDeletedInvoices = function(list) {
       return list.filter(function(inv) {
-        return (inv.Status==Status.DELETED);
+        return (inv.Status==Status.DELETED)
       })
     }
 
     invoices.isDownloading = function(inv) {
       return (inv.Status==Status.PENDINGDOWNLOAD
-        || Status.DOWNLOADFAILED);
+        || inv.Status==Status.DOWNLOADFAILED);
     }
   }
 

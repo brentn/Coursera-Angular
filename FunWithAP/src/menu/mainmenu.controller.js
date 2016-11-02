@@ -19,13 +19,14 @@
       MenuDataService.Reload()
       .then(function() {
         menu.data = MenuDataService.MenuData;
-      })
+      });
+      menu.flags = MenuDataService.userFlags;
     }
 
     $scope.$on('menuSection.loaded', function() {
       // only initialize the accordion after all sections have been rendered
       number_of_sections_loaded++;
-      if (number_of_sections_loaded==menu.data.length) {
+      if (number_of_sections_loaded==menu.data.sections.length) {
         $('#MainMenu').accordion({
           header: "menu-section>h3,menu-search-section>h3",
           navigate: false,

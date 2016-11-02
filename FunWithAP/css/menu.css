@@ -2,6 +2,13 @@ main-menu .menu {
   width:250px;
   height:720px;
 }
+main-menu .user-flags {
+  color:grey;
+  font-size:0.8em;
+  font-style:italic;
+  text-align:center;
+  display:block;
+}
 main-menu menu-section, main-menu menu-search-section {
   display:block;
 }
