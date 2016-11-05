@@ -1,5 +1,7 @@
-<img class='menu-item-image' ng-src={{menuItem.getProfileImageUrl()}}></img>
-<div class='menu-item-details'>
-  <span class='menu-item-title'>{{menuItem.obj.VendorId||'Invoice'}}</span><br/>
-  <span class='menu-item-detail'>#{{menuItem.obj.InvoiceId}} {{menuItem.obj.InvoiceDate | date : format : timezone}}</span>
-</div>
+<a ui-sref="home.invoice({InvoiceId:'{{menuItem.obj.InvoiceId}}'})">
+  <img class='menu-item-image' ng-src={{menuItem.getProfileImageUrl()}}></img>
+  <div class='menu-item-details'>
+    <span class='menu-item-title'>{{menuItem.obj.VendorId||'Invoice'}}</span><br/>
+    <span class='menu-item-detail'>#{{menuItem.obj.InvoiceId}} {{menuItem.obj.InvoiceDate | date : format : timezone}}</span>
+  </div>
+</a>

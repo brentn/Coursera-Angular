@@ -49,6 +49,10 @@ main-menu menu-item {
   width:100%;
   padding:5px 0 5px 0;
 }
+main-menu menu-item>a {
+  display:block;
+  width:100%;
+}
  main-menu .menu-items>div:first-child {
   background-image: -webkit-linear-gradient(rgba(255,255,255,0.8),rgba(0,0,0,0.0));
 }

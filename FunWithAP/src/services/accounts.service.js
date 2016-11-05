@@ -16,5 +16,19 @@
       return deferred.promise;
     }
 
+    service.accountBalance = function(account) {
+      var deferred = $q.defer();
+      if (account && account.length>0) {
+        $timeout(function() {
+          deferred.resolve({data:{balance:'304.32'}});
+        }, 500);
+      } else {
+        $timeout(function() {
+          deferred.resolve({data:{}});
+        }, 500);
+      }
+      return deferred.promise;
+    }
+
   }
 })();

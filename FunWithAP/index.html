@@ -2,8 +2,12 @@
   <head>
     <link href="css/jquery-ui.min.css" rel="stylesheet" type="text/css">
     <link href="css/menu.css" rel="stylesheet" type="text/css">
+    <link href="css/invoice.css" rel="stylesheet" type="text/css">
+    <link href="css/app.css" rel="stylesheet" type="text/css">
+
   </head>
   <body>
+
 
     <ui-view></ui-view>
 
@@ -16,13 +20,17 @@
     <!-- Modules -->
     <script src="src/ap.module.js"></script>
     <script src="src/menu/mainmenu.module.js"></script>
+    <script src="src/invoice/invoice.module.js"></script>
+    <script src="src/spinner/spinner.module.js"></script>
 
     <!-- Artifacts -->
-    <script src="src/routes.js"></script>
+    <script src="src/services/invoice.service.js"></script>
+    <script src="src/services/accounts.service.js"></script>
+    <script src="src/services/user.service.js"></script>
     <script src="src/menu/services/menudata.service.js"></script>
-    <script src="src/menu/services/invoice.service.js"></script>
-    <script src="src/menu/services/accounts.service.js"></script>
-    <script src="src/menu/services/user.service.js"></script>
+    <script src="src/routes.js"></script>
+
+    <script src="src/invoicepanel.controller.js"></script>
 
     <script src="src/menu/mainmenu.component.js"></script>
     <script src="src/menu/mainmenu.controller.js"></script>
@@ -34,5 +42,18 @@
     <script src="src/menu/menusearchsection.controller.js"></script>
     <script src="src/menu/menuitem.component.js"></script>
     <script src="src/menu/menuitem.controller.js"></script>
+
+    <script src="src/invoice/invoice.component.js"></script>
+    <script src="src/invoice/invoice.controller.js"></script>
+    <script src="src/invoice/invoiceheader.component.js"></script>
+    <script src="src/invoice/invoicedetails.component.js"></script>
+    <script src="src/invoice/invoicedetails.controller.js"></script>
+    <script src="src/invoice/invoicelines.component.js"></script>
+    <script src="src/invoice/filters/zeropad.filter.js"></script>
+    <script src="src/invoice/filters/statusname.filter.js"></script>
+    <script src="src/invoice/filters/balancestring.filter.js"></script>
+
+    <script src="src/spinner/loadingspinner.component.js"></script>
+
   </body>
 </html>

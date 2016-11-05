@@ -4,8 +4,8 @@
   angular.module('MainMenu')
   .controller('MenuItemController', MenuItemController);
 
-  MenuItemController.$inject = ['MenuDataService', 'UserService'];
-  function MenuItemController(MenuDataService, UserService) {
+  MenuItemController.$inject = ['MenuDataService', 'UserService', '$rootScope'];
+  function MenuItemController(MenuDataService, UserService, $rootScope) {
     var menuItem = this;
 
     menuItem.getProfileImageUrl = function() {

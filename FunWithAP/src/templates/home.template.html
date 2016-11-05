@@ -1,3 +1,8 @@
-<div>
+<app>
+  <h1 class='title'>Online Accounts Payable</h1>
   <main-menu></main-menu>
-</div>
+  <invoice-panel>
+    <loading-spinner visible='app.showSpinner'></loading-spinner>
+    <ui-view></ui-view>
+  </invoice-panel>
+</app>

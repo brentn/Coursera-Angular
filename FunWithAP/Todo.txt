@@ -1,4 +1,12 @@
-
-move item template into menudata.service (normalTemplate, financeTemplate, overseerTemplate)
+Menu
 Deleted should only show last 60 days
+AwaitingMyApproval (director & edms)
+Finance template?
 Finance flags (secure note, moreinfo)
+catch ajax errors
+handle errors
+tests
+
+invoice module
+
+Click on same menu item never shuts off spinner

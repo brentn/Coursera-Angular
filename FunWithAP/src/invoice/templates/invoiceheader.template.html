@@ -1,0 +1,12 @@
+<span class='profile-image'></span>
+<span class='invoice-image'></span>
+<div class='main'>
+  <div class='top'>
+    <span class='invoice-id'>Invoice #{{invoice.data.InvoiceId|zeroPad:5}}:</span>
+    <span class='cost-center'>Account # <input type='text'/></span>
+  </div>
+  <div class='bottom'>
+    <span class='invoice-status'>Status:{{invoice.data.Status|statusName}}</span>
+    <span class='account-balance'>{{invoice.balance|balanceString}}</span>
+  </div>
+</div>
