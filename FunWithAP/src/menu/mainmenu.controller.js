@@ -27,6 +27,7 @@
       // only initialize the accordion after all sections have been rendered
       number_of_sections_loaded++;
       if (number_of_sections_loaded==menu.data.sections.length) {
+        $('menu-search-section').show();
         $('#MainMenu').accordion({
           header: "menu-section>h3,menu-search-section>h3",
           navigate: false,

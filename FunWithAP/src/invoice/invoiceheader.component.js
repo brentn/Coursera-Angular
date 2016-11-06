@@ -4,7 +4,7 @@
   angular.module('Invoice')
   .component('invoiceHeader', {
     templateUrl:'src/invoice/templates/invoiceheader.template.html',
-    controllerAs: 'invoice',
+    controller: 'InvoiceHeaderController as invoice',
     bindings: {
       data: '<',
       balance: '<'

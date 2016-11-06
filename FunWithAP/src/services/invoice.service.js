@@ -32,7 +32,7 @@
         if (result.length>0) deferred.resolve({data:result[0]});
         else deferred.resolve({data:null});
       }, 800);
-      return deferred.promise
+      return deferred.promise;
     }
 
     invoices.getInvoiceLines = function(id) {
@@ -40,7 +40,7 @@
       $timeout(function() {
         deferred.resolve({data:fakeLines.data.filter(function(item) {return item.InvoiceId==id})});
       }, 800);
-      return deferred.promise
+      return deferred.promise;
     }
 
     invoices.getAllInvoices = function() {
