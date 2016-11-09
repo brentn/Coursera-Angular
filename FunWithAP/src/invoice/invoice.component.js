@@ -3,7 +3,7 @@
 
   angular.module('Invoice')
   .component('invoice', {
-    templateUrl: 'src/invoice/templates/invoice.template.html',
+    templateUrl: 'src/invoice/invoice.template.html',
     controller: 'InvoiceController as invoice',
     bindings: {
       data: '<',

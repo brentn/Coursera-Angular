@@ -3,10 +3,11 @@ Deleted should only show last 60 days
 AwaitingMyApproval (director & edms)
 Finance template?
 Finance flags (secure note, moreinfo)
-catch ajax errors
+catch ajax errors $q.reject(resonse)
 handle errors
 tests
+DIFFERENT ITEM TEMPLATE FOR FINANCE
+add amount to normal template
+enter to search
 
 invoice module
-
-Click on same menu item never shuts off spinner

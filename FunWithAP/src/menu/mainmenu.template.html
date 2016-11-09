@@ -1,0 +1,10 @@
+<link href="css/menu.css" rel="stylesheet" type="text/css">
+
+<div id='MainMenu' class='menu'>
+  <span class='user-flags'>{{menu.data.userFlags}}</span>
+  <menu-section ng-repeat='section in menu.data.sections'
+    title='section.title' total='section.total' items='section.items'
+    subsections='section.subsections'>
+  </menu-section>
+  <menu-search-section title='Search' complete='menu.onSectionComplete()'></menu-search-section>
+</div>

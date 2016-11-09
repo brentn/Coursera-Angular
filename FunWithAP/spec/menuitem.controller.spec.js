@@ -5,15 +5,15 @@ describe("MenuItemController", function() {
     module(function($provide) {
       $provide.service('UserServiceMock', function() {
         var service=this;
-        service.ProfileImageUrl = function() {
-          return url
+        service.getProfileImageUrl = function() {
+          return $q.when(url);
         };
       });
     });
     module('MainMenu');
   });
 
-  describe('getProfileImageUrl', function() {
+  describe('profileImageUrl', function() {
     var $controller;
     var menuItemController;
 
@@ -23,10 +23,10 @@ describe("MenuItemController", function() {
       menuItemController = $controller('MenuItemController',
         {MenuDataService: null, UserService: UserServiceMock});
       menuItemController.obj = {};
-    }))
+    }));
 
     it('should provide imageUrl from UserService', function() {
-      expect(menuItemController.getProfileImageUrl()).toBe(url);
-    })
-  })
+      expect(menuItemController.profileImageUrl).toEqual(url);
+    });
+  });
 })

@@ -59,26 +59,28 @@
 
     service.LoadFinanceItems = function() {
       // returns a tree of all menu items, for someone like Finance to see.
-      if (UserService.currentUserIsFinance()) {
-        service.MenuData.userFlags = '[Finance] '+service.MenuData.userFlags;
-        return InvoiceService.getAllInvoices()
-        .then(function(result) {
-          var items=[];
-          var submitted = InvoiceService.getSubmittedInvoices(result.data);
-          service.MenuData.sections[1].subsections[1].title='All Items ('+submitted.length+')';
-          service.MenuData.sections[1].subsections[1].items=buildTree(submitted);
-          var finance = InvoiceService.getProcessingInvoices(result.data);
-          service.MenuData.sections[2].subsections[0].title='Finance';
-          service.MenuData.sections[2].subsections[0].items=buildFinanceTree(finance);
-          var paying = InvoiceService.getPayingInvoices(result.data);
-          service.MenuData.sections[3].subsections[0].title='All Items ('+paying.length+')';
-          service.MenuData.sections[3].subsections[0].items=buildTree(paying);
-          setTotal(service.MenuData.sections[3], paying.length);
-          var paid = InvoiceService.getPaidInvoices(result.data);
-          service.MenuData.sections[4].subsections[0].title='All Items ('+paid.length+')';
-          service.MenuData.sections[4].subsections[0].items=buildTree(paid);
-        });
-      }
+      UserService.currentUserIsFinance().then(function(response) {
+        if (response.data===true) {
+          service.MenuData.userFlags = '[Finance] '+service.MenuData.userFlags;
+          return InvoiceService.getAllInvoices()
+          .then(function(result) {
+            var items=[];
+            var submitted = InvoiceService.getSubmittedInvoices(result.data);
+            service.MenuData.sections[1].subsections[1].title='All Items ('+submitted.length+')';
+            service.MenuData.sections[1].subsections[1].items=buildTree(submitted);
+            var finance = InvoiceService.getProcessingInvoices(result.data);
+            service.MenuData.sections[2].subsections[0].title='Finance';
+            service.MenuData.sections[2].subsections[0].items=buildFinanceTree(finance);
+            var paying = InvoiceService.getPayingInvoices(result.data);
+            service.MenuData.sections[3].subsections[0].title='All Items ('+paying.length+')';
+            service.MenuData.sections[3].subsections[0].items=buildTree(paying);
+            setTotal(service.MenuData.sections[3], paying.length);
+            var paid = InvoiceService.getPaidInvoices(result.data);
+            service.MenuData.sections[4].subsections[0].title='All Items ('+paid.length+')';
+            service.MenuData.sections[4].subsections[0].items=buildTree(paid);
+          });
+        }
+      });
     };
 
     service.LoadMyItems = function() {

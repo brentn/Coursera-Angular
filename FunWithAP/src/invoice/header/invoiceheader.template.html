@@ -1,0 +1,12 @@
+<span class='profile-image'><img ng-src='{{invoice.profileImageUrl}}'></span>
+<invoice-image id='invoice.data.InvoiceId'></invoice-image>
+<div class='main'>
+  <div class='top'>
+    <span class='invoice-id'>Invoice #{{invoice.data.InvoiceId|zeroPad:5}}:</span>
+    <span class='cost-center'>Account # <input type='text' ng-model='invoice.costCenter'/></span>
+  </div>
+  <div class='bottom'>
+    <span class='invoice-status'>{{invoice.data.Status|statusName}}</span>
+    <span class='account-balance'>{{invoice.balance|balanceString}}</span>
+  </div>
+</div>

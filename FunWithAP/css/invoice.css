@@ -2,7 +2,7 @@ invoice-header {
   display:block;
   position:relative;
   z-index:1;
-  max-height:54px;
+  max-height:56px;
   overflow:hidden;
   color:gray;
   background-color:#f6f6f6;
@@ -11,20 +11,21 @@ invoice-header {
   border-top-right-radius:5px;
   border-top-left-radius:5px;
 }
-invoice-header .profile-image img,invoice-header .invoice-image img {
+invoice-header .profile-image img,invoice-header invoice-image img {
   width:50px;
   height:50px;
-  margin-top:-2px;
   position:relative;
   z-index:2;
   border:2px solid #9bcc6c;
   border-radius:5px;
-  background-color:#888888;
 }
 invoice-header .profile-image {
+  background-color:#888888;
   float:left;
 }
-invoice-header .invoice-image {
+invoice-header invoice-image {
+  font-size:.8em;
+  text-align:center;
   float:right;
 }
 invoice-header  .main {
@@ -32,7 +33,7 @@ invoice-header  .main {
   overflow:hidden;
 }
 invoice-header .top {
-  height:30px;
+  height:32px;
   padding:0 10px 0 10px;
   border-bottom:2px solid #9bcc6c;
   vertical-align:middle;
@@ -75,6 +76,11 @@ invoice-details .header {
   border-top-left-radius:7px;
   padding:10px;
 }
+invoice-details table.basics td,
+invoice-details table.dates td,
+invoice-details table.comments td {
+  width:33%;
+}
 invoice-details .header table.basics {
   color:#808080;
   background-color:#a9a9a9;
@@ -93,12 +99,12 @@ invoice-details .header table.comments {
   width:100%;
   font-size:0.8em;
 }
+invoice-details table.comments textarea {
+  width:100%;
+}
 invoice-lines {
   display:block;
   margin:20px;
-}
-invoice-lines tr:first-child{
-  background-color:rgba(114, 199, 118, 0.50);
 }
 invoice-lines tr:nth-child(odd)		{
   background-color: rgba(114, 199, 118, 0.20);
@@ -106,7 +112,29 @@ invoice-lines tr:nth-child(odd)		{
 invoice-lines tr:nth-child(even)		{
   background-color:#f2f2f2; }
 
+invoice-buttons {
+  display:block;
+  width:100%;
+}
+invoice-buttons .buttons {
+  padding:20px;
+}
 invoice input[type='text'], invoice input[type='date'] {
   padding:6px;
   border-radius:5px;
+}
+invoice input[type='button'] {
+  background-color:#f6f6f6;
+  color: #1c94c4;
+  border:1px solid #cccccc;
+  border-radius:4px;
+  padding:.4em 1em;
+  font-family: Trebuchet MS,Tahoma,Verdana,Arial,sans-serif;
+  font-size:1em;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.missing {
+  background-color:#ffb3b3;
 }

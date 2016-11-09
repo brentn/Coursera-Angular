@@ -3,7 +3,7 @@
 
   angular.module('MainMenu')
   .component('mainMenu', {
-    templateUrl: 'src/menu/templates/mainmenu.template.html',
+    templateUrl: 'src/menu/mainmenu.template.html',
     controller: 'MainMenuController as menu'
   });
 

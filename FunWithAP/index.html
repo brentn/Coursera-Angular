@@ -1,8 +1,6 @@
 <html ng-app="AP">
   <head>
     <link href="css/jquery-ui.min.css" rel="stylesheet" type="text/css">
-    <link href="css/menu.css" rel="stylesheet" type="text/css">
-    <link href="css/invoice.css" rel="stylesheet" type="text/css">
     <link href="css/app.css" rel="stylesheet" type="text/css">
 
   </head>
@@ -28,28 +26,31 @@
     <script src="src/services/accounts.service.js"></script>
     <script src="src/services/user.service.js"></script>
     <script src="src/menu/services/menudata.service.js"></script>
+    <script src="src/invoice/services/vendors.service.js"></script>
     <script src="src/routes.js"></script>
 
     <script src="src/invoicepanel.controller.js"></script>
 
     <script src="src/menu/mainmenu.component.js"></script>
     <script src="src/menu/mainmenu.controller.js"></script>
-    <script src="src/menu/menusection.component.js"></script>
-    <script src="src/menu/menusection.controller.js"></script>
-    <script src="src/menu/menusubsection.component.js"></script>
-    <script src="src/menu/menusubsection.controller.js"></script>
-    <script src="src/menu/menusearchsection.component.js"></script>
-    <script src="src/menu/menusearchsection.controller.js"></script>
-    <script src="src/menu/menuitem.component.js"></script>
-    <script src="src/menu/menuitem.controller.js"></script>
+    <script src="src/menu/section/menusection.component.js"></script>
+    <script src="src/menu/section/menusection.controller.js"></script>
+    <script src="src/menu/section/subsection/menusubsection.component.js"></script>
+    <script src="src/menu/section/subsection/menusubsection.controller.js"></script>
+    <script src="src/menu/section/search/menusearchsection.component.js"></script>
+    <script src="src/menu/section/search/menusearchsection.controller.js"></script>
+    <script src="src/menu/item/menuitem.component.js"></script>
+    <script src="src/menu/item/menuitem.controller.js"></script>
+    <script src="src/menu/item/financemenuitem.component.js"></script>
 
     <script src="src/invoice/invoice.component.js"></script>
     <script src="src/invoice/invoice.controller.js"></script>
-    <script src="src/invoice/invoiceheader.component.js"></script>
-    <script src="src/invoice/invoiceheader.controller.js"></script>
-    <script src="src/invoice/invoicedetails.component.js"></script>
-    <script src="src/invoice/invoicedetails.controller.js"></script>
-    <script src="src/invoice/invoicelines.component.js"></script>
+    <script src="src/invoice/header/invoiceheader.component.js"></script>
+    <script src="src/invoice/header/image/invoiceimage.component.js"></script>
+    <script src="src/invoice/header/image/invoiceimage.controller.js"></script>
+    <script src="src/invoice/details/invoicedetails.component.js"></script>
+    <script src="src/invoice/details/lines/invoicelines.component.js"></script>
+    <script src="src/invoice/details/buttons/invoicebuttons.component.js"></script>
     <script src="src/invoice/filters/zeropad.filter.js"></script>
     <script src="src/invoice/filters/statusname.filter.js"></script>
     <script src="src/invoice/filters/balancestring.filter.js"></script>

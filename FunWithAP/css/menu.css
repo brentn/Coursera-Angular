@@ -78,6 +78,11 @@ main-menu .menu-item-detail {
   font-size:6.5pt;
   color:#999999;
 }
+main-menu .financeitem {
+  font-size:8pt;
+  display:block;
+  padding:4px
+}
 main-menu menu-search-section input {
   border-radius:5px;
   padding:5px;
@@ -110,4 +115,15 @@ main-menu .collapsible {
 }
 main-menu menu-search-section {
   display:none;
+}
+main-menu .financeitem .flag {
+  float:right;
+  border-radius:50%;
+  margin:2px;
+  width:10px;
+  height:10px;
+  background-color:blue;
+}
+main-menu .financeitem .flag.private {
+  background-color:green;
 }

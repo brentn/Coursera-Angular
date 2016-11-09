@@ -1,0 +1,30 @@
+<div>
+  <div class='header'>
+    <table class='basics'>
+      <tr><td>Vendor:<input type='text' ng-model='invoice.vendorId'/></td>
+        <td>Invoice Date:<input type='date' ng-model='invoice.invoiceDate'/></td>
+        <td>Original Invoice#:<input type='text' ng-model='invoice.invoiceNumber'/></td></tr>
+    </table>
+    <table class='dates'>
+      <tr><td>
+        <div>Submitted on:{{invoice.submittedDate|date : shortDate}}</div>
+        <div>Submitted by:{{invoice.submitterName}}</div>
+      </td>
+      <td>
+        <div>Approved on:{{invoice.data.ApprDate|date : shortDate}}</div>
+        <div>Approved by:{{invoice.approverName}}</div>
+      </td>
+      <td>
+        <div>Processed on:{{invoice.data.ProcDate|date : shortDate}}</div>
+        <div>Processed by:{{invoice.processorName}}</div>
+      </td></tr>
+    </table>
+    <table class='comments'>
+      <tr><td>Special instructions<br/><textarea rows="3" ng-model='invoice.comments' ng-disabled='{{!invoice.isOwner}}'/></td>
+        <td>Approver comments<br/><textarea rows='3' ng-model='invoice.apprComments' ng-disabled='{{!invoice.isApprover}}'/></td>
+        <td>Finance Comments<br/><textarea rows='3' ng-model='invoice.acctComments' ng-disabled='{{!invoice.isFinanace}}'/></td></tr>
+    </table>
+  </div>
+  <invoice-lines lines='invoice.lines'></invoice-lines>
+  <invoice-buttons data='invoice.data'></invoice-buttons>
+</div>

@@ -1,0 +1,10 @@
+<div class='buttons'>
+  <input type='button' value='Assign Charges'/>
+  <span style='float:right'>
+    <input ng-if="invoice.isFinance" type='button' value='View Log'/>
+    <input ng-if="invoice.isFinance" type='button' value='Account Balances'/>
+    <input ng-if="invoice.isFinance" type='button' value='Tax Details'/>
+    <input type='button' value='Print'/>
+    <input ng-if="invoice.isInSubmittableState" ng-disabled="! invoice.canBeSubmitted" type='button' value='Submit'/>
+  </span>
+</div>

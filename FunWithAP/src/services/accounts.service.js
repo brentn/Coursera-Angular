@@ -1,12 +1,20 @@
 (function() {
   'use strict';
 
-  angular.module('MainMenu')
+  angular.module('AP')
   .service('AccountsService', AccountsService);
 
   AccountsService.$inject = ['$q', '$timeout'];
   function AccountsService($q, $timeout) {
     var service = this;
+
+    service.allAccounts = function() {
+      var deferred = $q.defer();
+      $timeout(function() {
+        deferred.resolve({data:[{account:'110100',name:'AIA Account'},{account:'110110',name:'FamilyLife account'},{account:'110140',name:'IT Account'}]})
+      },600);
+      return deferred.promise;
+    }
 
     service.myAccounts = function() {
       var deferred = $q.defer();

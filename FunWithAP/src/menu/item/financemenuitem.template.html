@@ -1,0 +1,8 @@
+<a ui-sref="home.invoice({InvoiceId:'{{$ctrl.obj.InvoiceId}}'})" class='financeitem'>
+  {{$ctrl.obj.InvoiceDate|date : 'shortDate'}}
+  ({{$ctrl.obj.CostCenter}})
+  <b>{{$ctrl.obj.VendorId}}</b>
+  {{$ctrl.obj.TotalAmount|currency}}
+  <span ng-if='$ctrl.obj.PrivComment.length>0' class='private flag'></span>
+  <span ng-if='$ctrl.obj.MoreInfoRequested' class='moreinfo flag'></span>
+</a>
