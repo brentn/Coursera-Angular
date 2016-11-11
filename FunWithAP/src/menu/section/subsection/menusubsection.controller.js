@@ -8,7 +8,7 @@
     var subsection=this;
 
     subsection.expand = function($event) {
-      $($event.currentTarget).siblings().toggle(200);
+      $($event.currentTarget).siblings().slideToggle(200);
     }
   }
 })();

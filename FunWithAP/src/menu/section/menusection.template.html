@@ -3,7 +3,7 @@
   <div class='menu-subsection' ng-repeat='subsection in section.subsections'>
     <div ng-if='subsection.items.length>0'>
       <h4>{{subsection.title}}</h4>
-      <menu-subsection class='menu-subsection' items='subsection.items'></menu-subsection>
+      <menu-subsection class='menu-subsection' items='subsection.items' template='subsection.template'></menu-subsection>
     </div>
   </div>
   <h4 ng-if='section.subsectionsDisplayed'>My Invoices</h4>

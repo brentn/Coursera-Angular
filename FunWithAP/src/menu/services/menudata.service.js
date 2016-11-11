@@ -17,28 +17,32 @@
         subsections: [{
           title:'Awaiting my approval'
         },{
-          title:'Finance'
+          title:'Finance',
+          template:'finance'
         },{
           title:'My Accounts',
         }]
       },{
         title:'Processing',
         subsections: [{
-          title:'Finance'
+          title:'Finance',
+          template:'finance'
         },{
           title:'My Accounts'
         }]
       },{
         title:'Paying',
         subsections: [{
-          title:'Finance'
+          title:'Finance',
+          template:'finance'
         },{
           title:'My Accounts'
         }]
       },{
         title:'Paid',
         subsections: [{
-          title:'Finance'
+          title:'Finance',
+          template:'finance'
         },{
           title:'My Accounts'
         }]

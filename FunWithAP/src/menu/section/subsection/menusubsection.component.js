@@ -8,6 +8,7 @@
     bindings: {
       title: '<',
       items: '<',
+      template: '<',
       level: '@'
     }
   });

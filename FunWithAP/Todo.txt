@@ -6,8 +6,8 @@ Finance flags (secure note, moreinfo)
 catch ajax errors $q.reject(resonse)
 handle errors
 tests
-DIFFERENT ITEM TEMPLATE FOR FINANCE
 add amount to normal template
 enter to search
+private flag should only show for finance
 
 invoice module
