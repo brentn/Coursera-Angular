@@ -5,7 +5,7 @@ describe("MenuItemController", function() {
     module(function($provide) {
       $provide.service('UserServiceMock', function() {
         var service=this;
-        service.getProfileImageUrl = function() {
+        service.getProfileImageUrl = function(userId) {
           return $q.when(url);
         };
       });
@@ -22,10 +22,12 @@ describe("MenuItemController", function() {
 
       menuItemController = $controller('MenuItemController',
         {MenuDataService: null, UserService: UserServiceMock});
+        
       menuItemController.obj = {};
     }));
 
     it('should provide imageUrl from UserService', function() {
+      menuItemController.$onInit();
       expect(menuItemController.profileImageUrl).toEqual(url);
     });
   });
